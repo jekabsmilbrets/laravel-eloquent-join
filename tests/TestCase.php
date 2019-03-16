@@ -2,15 +2,18 @@
 
 namespace Fico7489\Laravel\EloquentJoin\Tests;
 
-use Fico7489\Laravel\EloquentJoin\Tests\Models\Seller;
+use Fico7489\Laravel\EloquentJoin\Tests\Models\Location;
 use Fico7489\Laravel\EloquentJoin\Tests\Models\Order;
 use Fico7489\Laravel\EloquentJoin\Tests\Models\OrderItem;
-use Fico7489\Laravel\EloquentJoin\Tests\Models\Location;
+use Fico7489\Laravel\EloquentJoin\Tests\Models\Seller;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
     public function setUp(): void
     {
+        $dotenv = \Dotenv\Dotenv::create(__DIR__.'/..', '.env');
+        $dotenv->load();
+
         parent::setUp();
 
         $seller = Seller::create(['title' => 1]);
@@ -51,38 +54,6 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        // Setup default database to use sqlite :memory:
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
-            'prefix'   => '',
-        ]);
-
-        $app['config']->set('database.default', 'mysql');
-        $app['config']->set('database.connections.mysql', [
-            'driver'    => 'mysql',
-            'host'      => 'localhost',
-            'database'  => 'join',
-            'username'  => 'root',
-            'password'  => '',
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'strict'    => false,
-        ]);
-
-        $app['config']->set('database.default', 'pgsql');
-        $app['config']->set('database.connections.pgsql', [
-            'driver'    => 'pgsql',
-            'host'      => 'localhost',
-            'database'  => 'join',
-            'username'  => 'postgres',
-            'password'  => 'root',
-            'charset'   => 'utf8',
-            'prefix'    => '',
-            'schema'    => 'public',
-            'sslmode'   => 'prefer',
-        ]);
     }
 
     protected function getPackageProviders($app)
@@ -92,16 +63,14 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function assertQueryMatches($expected, $actual)
     {
-        $actual   = preg_replace('/\s\s+/', ' ', $actual);
-        $actual   = str_replace(['\n', '\r'], '', $actual);
+        $actual = preg_replace('/\s\s+/', ' ', $actual);
+        $actual = str_replace(['\n', '\r'], '', $actual);
 
         $expected = preg_replace('/\s\s+/', ' ', $expected);
         $expected = str_replace(['\n', '\r'], '', $expected);
-        $expected   = '/'.$expected.'/';
+        $expected = '/'.$expected.'/';
         $expected = preg_quote($expected);
-        if ('mysql' == $_ENV['type']) {
-            $expected = str_replace(['"'], '`', $expected);
-        }
+        $expected = str_replace(['"'], '`', $expected);
 
         $this->assertRegExp($expected, $actual);
     }
