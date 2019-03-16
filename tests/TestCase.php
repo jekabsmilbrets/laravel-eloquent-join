@@ -10,7 +10,7 @@ use Fico7489\Laravel\EloquentJoin\Tests\Models\Seller;
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
     public function setUp(): void
-    {   
+    {
         if (method_exists(\Dotenv\Dotenv::class, 'create')) {
             $dotenv = \Dotenv\Dotenv::create(__DIR__.'/..', '.env');
         } else {
