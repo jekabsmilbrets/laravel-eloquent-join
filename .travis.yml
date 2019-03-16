@@ -32,22 +32,18 @@ env:
   global:
     - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-ansi --no-progress --no-suggest"
 
-before_install:
-  - composer clear-cache
-  - composer require --dev friendsofphp/php-cs-fixer
-  - composer require --dev phpstan/phpstan
-  - if [ "$LARAVEL_VERSION" != "" ]; then composer require --dev "laravel/framework:${LARAVEL_VERSION}" --no-update; fi;
+install:
   - mysql_upgrade -u root 
   - mysql -h localhost -e "CREATE DATABASE homestead;"
   - mysql -h localhost -e "GRANT USAGE ON *.* TO homestead@localhost IDENTIFIED BY 'secret';"
   - mysql -h localhost -e "GRANT ALL PRIVILEGES ON homestead.* TO homestead@localhost;"
   - mysql -h localhost -e "FLUSH PRIVILEGES;"
-
-install:
+  - composer clear-cache
+  - if [ "$LARAVEL_VERSION" != "" ]; then composer require --dev "laravel/framework:${LARAVEL_VERSION}" --no-update; fi;
+  - travis_retry composer update $DEFAULT_COMPOSER_FLAGS
+  - cp .env.example .env
   - echo 'zend.assertions=1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - echo 'assert.exception=On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-  - cp .env.example .env
-  - travis_retry composer update $DEFAULT_COMPOSER_FLAGS
 
 script:
   - ./vendor/bin/phpunit --coverage-text --coverage-clover=build/logs/clover.xml
@@ -58,8 +54,8 @@ jobs:
     - stage: Quality
       php: 7.2
       env: PHPStan
-      install: travis_retry composer update --prefer-dist --prefer-stable
-      before_script:
+      install: 
+        - composer require --dev phpstan/phpstan
         - travis_retry composer update --prefer-dist --prefer-stable
       script:
         - ./vendor/bin/phpstan analyse --level=0 src -c phpstan.neon
@@ -68,6 +64,7 @@ jobs:
       php: 7.2
       env: php-cs-fixer
       install:
+        - composer require --dev friendsofphp/php-cs-fixer
         - phpenv config-rm xdebug.ini
         - travis_retry composer update --prefer-dist --prefer-stable
       script:
