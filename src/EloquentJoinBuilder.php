@@ -323,7 +323,7 @@ class EloquentJoinBuilder extends Builder
 
         foreach (static::DISABLED_COMPONENTS as $component) {
             if (!empty($relationBuilder->getQuery()->$component)) {
-                throw new InvalidRelationClause();
+                // throw new InvalidRelationClause();
             }
         }
 
