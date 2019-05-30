@@ -198,13 +198,14 @@ class EloquentJoinBuilder extends Builder
             $relationsAccumulated[]    = $relatedTableAlias;
             $relationAccumulatedString = implode('_', $relationsAccumulated);
 
+
             //relations count
             if ($this->appendRelationsCount) {
                 $this->selectRaw('COUNT('.$relatedTableAlias.'.'.$relatedPrimaryKey.') as '.$relationAccumulatedString.'_count');
             }
 
             if (!in_array($relationAccumulatedString, $this->joinedTables)) {
-                $this->joinRelation($relatedRelation, $currentTableAlias, $relatedTableAlias, $joinMethod);
+                $this->joinRelation($relation, $relatedRelation, $currentTableAlias, $relatedTableAlias, $joinMethod);
             }
 
             $currentModel      = $relatedModel;
@@ -245,11 +246,10 @@ class EloquentJoinBuilder extends Builder
         return $property->getValue($relation);
     }
 
-    public function joinRelation(Relation $relation, string $currentTableAlias, string $relatedTableAlias, string $joinMethod)
+    public function joinRelation(string $name, Relation $relation, string $currentTableAlias, string $relatedTableAlias, string $joinMethod)
     {
         $relatedModel = $relation->getRelated();
         $relatedTable = $relatedModel->getTable();
-        $joinQuery = $relatedTable.($relatedTableAlias !== $relatedTable ? ' as '.$relatedTableAlias : '');
 
         if ($relation instanceof MorphTo) {
             return;
@@ -257,10 +257,10 @@ class EloquentJoinBuilder extends Builder
 
         if ($relation instanceof BelongsToMany) {
             $joinPivotQuery = $relation->getTable();
-            $pivotTableAlias = $relation->getTable();
+            $pivotTableAlias = $name."_pivot";
 
             $this->$joinMethod(
-                $joinPivotQuery,
+                $joinPivotQuery." as ".$pivotTableAlias,
                 $this->parseAliasableKey($pivotTableAlias, $this->getKeyFromRelation($relation, 'relatedPivotKey')),
                 '=',
                 $this->parseAliasableKey($currentTableAlias, $this->getKeyFromRelation($relation, 'parentKey'))
@@ -269,7 +269,10 @@ class EloquentJoinBuilder extends Builder
             $relatedKey = $this->getKeyFromRelation($relation, 'relatedKey');
 
             $currentTableAlias = $pivotTableAlias;
+            $relatedTableAlias = $pivotTableAlias."_".$relatedTableAlias;
+
             $currentKey = $this->getKeyFromRelation($relation, 'foreignPivotKey');
+
         }
 
         if ($relation instanceof BelongsTo) {
@@ -284,8 +287,14 @@ class EloquentJoinBuilder extends Builder
             throw new InvalidRelation();
         }
 
+        $joinQuery = $relatedTable.($relatedTableAlias !== $relatedTable ? ' as '.$relatedTableAlias : '');
+
         $this->$joinMethod($joinQuery, function ($join) use ($relation, $relatedTableAlias, $relatedKey, $currentTableAlias, $currentKey) {
-            $join->on($this->parseAliasableKey($relatedTableAlias, $relatedKey), '=', $this->parseAliasableKey($currentTableAlias, $currentKey));
+            $join->on(
+                $this->parseAliasableKey($relatedTableAlias, $relatedKey), 
+                '=', 
+                $this->parseAliasableKey($currentTableAlias, $currentKey)
+            );
 
             $this->joinQuery($join, $relation, $relatedTableAlias);
         });
