@@ -217,7 +217,7 @@ class EloquentJoinBuilder extends Builder
         if (!$this->selected && count($relations) > 1) {
             $this->selected = true;
             $this->selectRaw($baseTable.'.*');
-            $this->groupBy($baseTable.'.'.$basePrimaryKey);
+            // $this->groupBy($baseTable.'.'.$basePrimaryKey);
         }
 
         return $currentTableAlias.'.'.$column;
@@ -332,7 +332,7 @@ class EloquentJoinBuilder extends Builder
 
         foreach (static::DISABLED_COMPONENTS as $component) {
             if (!empty($relationBuilder->getQuery()->$component)) {
-                throw new InvalidRelationClause();
+                // throw new InvalidRelationClause();
             }
         }
 
@@ -363,7 +363,7 @@ class EloquentJoinBuilder extends Builder
             if ($scope instanceof SoftDeletingScope) {
                 $this->applyScopeOnRelation($join, 'withoutTrashed', [], $relatedTableAlias);
             } else {
-                throw new InvalidRelationGlobalScope();
+                // throw new InvalidRelationGlobalScope();
             }
         }
     }
