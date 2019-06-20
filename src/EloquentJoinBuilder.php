@@ -269,7 +269,6 @@ class EloquentJoinBuilder extends Builder
             $relatedKey = $this->getKeyFromRelation($relation, 'relatedKey');
 
             $currentTableAlias = $pivotTableAlias;
-            $relatedTableAlias = $pivotTableAlias."_".$relatedTableAlias;
 
             $currentKey = $this->getKeyFromRelation($relation, 'foreignPivotKey');
 
