@@ -295,7 +295,7 @@ class EloquentJoinBuilder extends Builder
                 $this->parseAliasableKey($currentTableAlias, $currentKey)
             );
 
-            $this->joinQuery($join, $relation, $relatedTableAlias);
+            $this->joinQuery($join, $relation, $relatedTableAlias, $currentTableAlias);
         });
     }
 
@@ -324,7 +324,7 @@ class EloquentJoinBuilder extends Builder
         }
     }
 
-    private function joinQuery($join, $relation, $relatedTableAlias)
+    private function joinQuery($join, $relation, $relatedTableAlias, $currentTableAlias)
     {
         /** @var Builder $relationQuery */
         $relationBuilder = $relation->getQuery();
@@ -348,11 +348,19 @@ class EloquentJoinBuilder extends Builder
             // Remove first alias table name
             $partsColumn = explode('.', $clause['column']);
 
+            $tableName = $partsColumn[0];
+
             if (count($partsColumn) > 1) {
                 $clause['column'] = implode('.', array_slice($partsColumn, 1));
             }
 
-            $clause['column'] = $this->parseAliasableKey($relatedTableAlias, $clause['column']);
+            if ($tableName === $relation->getTable()) {
+                $clause['column'] = $this->parseAliasableKey($currentTableAlias, $clause['column']); 
+            } else {
+                $clause['column'] = $this->parseAliasableKey($relatedTableAlias, $clause['column']); 
+            }
+           
+            
 
             $join->$method(...array_values($clause));
         }
