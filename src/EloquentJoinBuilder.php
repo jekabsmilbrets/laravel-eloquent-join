@@ -354,7 +354,7 @@ class EloquentJoinBuilder extends Builder
                 $clause['column'] = implode('.', array_slice($partsColumn, 1));
             }
 
-            if ($tableName === $relation->getTable()) {
+            if ($relation instanceof BelongsToMany && $tableName === $relation->getTable()) {
                 $clause['column'] = $this->parseAliasableKey($currentTableAlias, $clause['column']); 
             } else {
                 $clause['column'] = $this->parseAliasableKey($relatedTableAlias, $clause['column']); 
