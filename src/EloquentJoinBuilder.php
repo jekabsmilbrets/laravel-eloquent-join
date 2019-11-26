@@ -217,7 +217,7 @@ class EloquentJoinBuilder extends Builder
         if (!$this->selected && count($relations) > 1) {
             $this->selected = true;
             $this->selectRaw($baseTable.'.*');
-            // $this->groupBy($baseTable.'.'.$basePrimaryKey);
+            $this->groupBy($baseTable.'.'.$basePrimaryKey);
         }
 
         return $currentTableAlias.'.'.$column;
