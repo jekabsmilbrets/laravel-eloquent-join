@@ -24,32 +24,6 @@ class ExceptionTest extends TestCase
         $this->assertTrue(false);
     }
 
-    public function testInvalidRelationClause()
-    {
-        try {
-            Seller::whereJoin('locationPrimaryInvalid.name', '=', 'test')->get();
-        } catch (InvalidRelationClause $e) {
-            $this->assertEquals((new InvalidRelationClause())->message, $e->getMessage());
-
-            return;
-        }
-
-        $this->assertTrue(false);
-    }
-
-    public function testInvalidRelationGlobalScope()
-    {
-        try {
-            Seller::whereJoin('locationPrimaryInvalid3.id', '=', 'test')->get();
-        } catch (InvalidRelationGlobalScope $e) {
-            $this->assertEquals((new InvalidRelationGlobalScope())->message, $e->getMessage());
-
-            return;
-        }
-
-        $this->assertTrue(false);
-    }
-
     public function testInvalidAggregateMethod()
     {
         try {
