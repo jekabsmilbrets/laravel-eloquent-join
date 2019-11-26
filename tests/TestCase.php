@@ -21,6 +21,8 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
         parent::setUp();
 
+        $this->artisan('migrate:fresh');
+
         $seller = Seller::create(['title' => 1]);
         $seller2 = Seller::create(['title' => 2]);
         $seller3 = Seller::create(['title' => 3]);
