@@ -15,12 +15,15 @@ use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Seller;
  */
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
+    /**
+     *
+     */
     public function setUp(): void
     {
         if (method_exists(Dotenv::class, 'create')) {
-            $dotenv = Dotenv::createImmutable(__DIR__.'/..', '.env');
+            $dotenv = Dotenv::createImmutable(__DIR__ . '/..', '.env');
         } else {
-            $dotenv = new Dotenv(__DIR__.'/..', '.env');
+            $dotenv = new Dotenv(__DIR__ . '/..', '.env');
         }
 
         $dotenv->load();
@@ -53,6 +56,9 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
         $this->startListening();
     }
 
+    /**
+     *
+     */
     protected function startListening()
     {
         DB::enableQueryLog();
@@ -96,7 +102,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
         $expected = preg_replace('/\s\s+/', ' ', $expected);
         $expected = str_replace(['\n', '\r'], '', $expected);
-        $expected = '/'.$expected.'/';
+        $expected = '/' . $expected . '/';
         $expected = preg_quote($expected);
         $expected = str_replace(['"'], '`', $expected);
 

@@ -7,8 +7,16 @@ use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationWhere;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Seller;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class ExceptionTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests
+ */
 class ExceptionTest extends TestCase
 {
+    /**
+     *
+     */
     public function testInvalidRelationWhere()
     {
         try {
@@ -22,6 +30,9 @@ class ExceptionTest extends TestCase
         $this->assertTrue(false);
     }
 
+    /**
+     *
+     */
     public function testInvalidAggregateMethod()
     {
         try {

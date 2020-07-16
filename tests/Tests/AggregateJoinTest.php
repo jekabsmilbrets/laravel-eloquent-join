@@ -6,8 +6,16 @@ use JekabsMilbrets\Laravel\EloquentJoin\EloquentJoinBuilder;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Order;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class AggregateJoinTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Clauses
+ */
 class AggregateJoinTest extends TestCase
 {
+    /**
+     * @var string
+     */
     private $queryTest = 'select orders.*, SUM(sellers.id) as sort 
             from "orders" 
             left join "sellers" on "sellers"."id" = "orders"."seller_id" 
@@ -15,6 +23,9 @@ class AggregateJoinTest extends TestCase
             group by "orders"."id" 
             order by sort asc';
 
+    /**
+     *
+     */
     public function testAvg()
     {
         Order::joinRelations('seller')
@@ -25,6 +36,9 @@ class AggregateJoinTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testSum()
     {
         Order::joinRelations('seller')
@@ -35,6 +49,9 @@ class AggregateJoinTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testMax()
     {
         Order::joinRelations('seller')
@@ -45,6 +62,9 @@ class AggregateJoinTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testMin()
     {
         Order::joinRelations('seller')
@@ -55,6 +75,9 @@ class AggregateJoinTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testCount()
     {
         Order::joinRelations('seller')

@@ -14,8 +14,6 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Database\Query\JoinClause;
 use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidAggregateMethod;
 use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelation;
-use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationClause;
-use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationGlobalScope;
 use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationWhere;
 use ReflectionClass;
 use ReflectionException;
@@ -170,8 +168,8 @@ class EloquentJoinBuilder extends Builder
             //relations count
             if ($this->appendRelationsCount) {
                 $this->selectRaw(
-                    'COUNT('.$relatedTableAlias.'.'.$relatedPrimaryKey.') as '.
-                    $relationAccumulatedString.'_count'
+                    'COUNT(' . $relatedTableAlias . '.' . $relatedPrimaryKey . ') as ' .
+                    $relationAccumulatedString . '_count'
                 );
             }
 
@@ -193,11 +191,11 @@ class EloquentJoinBuilder extends Builder
 
         if (!$this->selected && count($relations) > 1) {
             $this->selected = true;
-            $this->selectRaw($baseTable.'.*');
-            $this->groupBy($baseTable.'.'.$basePrimaryKey);
+            $this->selectRaw($baseTable . '.*');
+            $this->groupBy($baseTable . '.' . $basePrimaryKey);
         }
 
-        return $currentTableAlias.'.'.$column;
+        return $currentTableAlias . '.' . $column;
     }
 
     /**
@@ -232,10 +230,10 @@ class EloquentJoinBuilder extends Builder
 
         if ($relation instanceof BelongsToMany) {
             $joinPivotQuery  = $relation->getTable();
-            $pivotTableAlias = $name.'_pivot';
+            $pivotTableAlias = $name . '_pivot';
 
             $this->$joinMethod(
-                $joinPivotQuery.' as '.$pivotTableAlias,
+                $joinPivotQuery . ' as ' . $pivotTableAlias,
                 $this->parseAliasableKey($pivotTableAlias, $this->getKeyFromRelation($relation, 'foreignPivotKey')),
                 '=',
                 $this->parseAliasableKey($currentTableAlias, $this->getKeyFromRelation($relation, 'parentKey'))
@@ -251,7 +249,7 @@ class EloquentJoinBuilder extends Builder
         if ($relation instanceof BelongsTo) {
             $relatedKey = $this->getKeyFromRelation($relation, 'ownerKey');
             $currentKey = $this->getKeyFromRelation($relation, 'foreignKey');
-        } elseif ($relation instanceof HasOneOrMany) {
+        } else if ($relation instanceof HasOneOrMany) {
             $currentKey = $this->getKeyFromRelation($relation, 'parentKey');
             $relatedKey = $this->getKeyFromRelation($relation, 'foreignKey');
         }
@@ -260,28 +258,29 @@ class EloquentJoinBuilder extends Builder
             throw new InvalidRelation();
         }
 
-        $joinQuery = $relatedTable.($relatedTableAlias !== $relatedTable ? ' as '.$relatedTableAlias : '');
+        $joinQuery = $relatedTable . ($relatedTableAlias !== $relatedTable ? ' as ' . $relatedTableAlias : '');
 
         $this->$joinMethod(
-            $joinQuery, function ($join) use (
-            $relation,
-            $relatedTableAlias,
-            $relatedKey,
-            $currentTableAlias,
-            $currentKey
-        ) {
-                $join->on(
-                $this->parseAliasableKey($relatedTableAlias, $relatedKey),
-                '=',
-                $this->parseAliasableKey($currentTableAlias, $currentKey)
-            );
-
-                $this->joinQuery(
-                $join,
+            $joinQuery,
+            function ($join) use (
                 $relation,
                 $relatedTableAlias,
-                $currentTableAlias
-            );
+                $relatedKey,
+                $currentTableAlias,
+                $currentKey
+            ) {
+                $join->on(
+                    $this->parseAliasableKey($relatedTableAlias, $relatedKey),
+                    '=',
+                    $this->parseAliasableKey($currentTableAlias, $currentKey)
+                );
+
+                $this->joinQuery(
+                    $join,
+                    $relation,
+                    $relatedTableAlias,
+                    $currentTableAlias
+                );
             }
         );
     }
@@ -294,25 +293,26 @@ class EloquentJoinBuilder extends Builder
      */
     protected function parseAliasableKey(string $alias, string $key)
     {
-        return $alias.'.'.$key;
+        return $alias . '.' . $key;
     }
 
     /**
      * @param Relation $relation
      * @param string   $keyName
+     *
      * @return mixed
      *
      * @throws ReflectionException
      */
     public function getKeyFromRelation(Relation $relation, string $keyName)
     {
-        $getQualifiedKeyMethod = 'getQualified'.ucfirst($keyName).'Name';
+        $getQualifiedKeyMethod = 'getQualified' . ucfirst($keyName) . 'Name';
 
         if (method_exists($relation, $getQualifiedKeyMethod)) {
             return last(explode('.', $relation->$getQualifiedKeyMethod()));
         }
 
-        $getKeyMethod = 'get'.ucfirst($keyName);
+        $getKeyMethod = 'get' . ucfirst($keyName);
 
         if (method_exists($relation, $getKeyMethod)) {
             return $relation->$getKeyMethod();
@@ -349,7 +349,7 @@ class EloquentJoinBuilder extends Builder
         $wheres = array_slice($relationBuilder->getQuery()->wheres, $this->skipClausesByClassRelation($relation));
 
         foreach ($wheres as $clause) {
-            $method = 'Basic' === $clause['type'] ? 'where' : 'where'.$clause['type'];
+            $method = 'Basic' === $clause['type'] ? 'where' : 'where' . $clause['type'];
             unset($clause['type']);
 
             if (!isset($clause['column'])) {
@@ -419,7 +419,7 @@ class EloquentJoinBuilder extends Builder
                 [$join, 'where'],
                 [$this->parseAliasableKey($relatedTableAlias, 'deleted_at'), '=', null]
             );
-        } elseif ('onlyTrashed' == $method) {
+        } else if ('onlyTrashed' == $method) {
             call_user_func_array(
                 [$join, 'where'],
                 [$this->parseAliasableKey($relatedTableAlias, 'deleted_at'), '<>', null]
@@ -566,11 +566,11 @@ class EloquentJoinBuilder extends Builder
             $this->checkAggregateMethod($aggregateMethod);
 
             $sortsCount = count($this->query->orders ?? []);
-            $sortAlias  = 'sort'.(0 == $sortsCount ? '' : ($sortsCount + 1));
+            $sortAlias  = 'sort' . (0 == $sortsCount ? '' : ($sortsCount + 1));
 
-            $query->selectRaw($aggregateMethod.'('.$column.') as '.$sortAlias);
+            $query->selectRaw($aggregateMethod . '(' . $column . ') as ' . $sortAlias);
 
-            return $this->orderByRaw($sortAlias.' '.$direction);
+            return $this->orderByRaw($sortAlias . ' ' . $direction);
         }
 
         //order by base table field
@@ -586,13 +586,15 @@ class EloquentJoinBuilder extends Builder
     private function checkAggregateMethod($aggregateMethod)
     {
         if (!in_array(
-            $aggregateMethod, [
-            self::AGGREGATE_SUM,
-            self::AGGREGATE_AVG,
-            self::AGGREGATE_MAX,
-            self::AGGREGATE_MIN,
-            self::AGGREGATE_COUNT,
-        ])) {
+            $aggregateMethod,
+            [
+                self::AGGREGATE_SUM,
+                self::AGGREGATE_AVG,
+                self::AGGREGATE_MAX,
+                self::AGGREGATE_MIN,
+                self::AGGREGATE_COUNT,
+            ]
+        )) {
             throw new InvalidAggregateMethod();
         }
     }
@@ -611,13 +613,16 @@ class EloquentJoinBuilder extends Builder
         $leftJoin = null !== $leftJoin ? $leftJoin : $this->leftJoin;
 
         $query  = $this->baseBuilder ? $this->baseBuilder : $this;
-        $column = $query->performJoin($relations.'.FAKE_FIELD', $leftJoin);
+        $column = $query->performJoin($relations . '.FAKE_FIELD', $leftJoin);
 
         return $this;
     }
 
     //getters and setters
 
+    /**
+     * @return bool
+     */
     public function isUseTableAlias(): bool
     {
         return $this->useTableAlias;
@@ -625,6 +630,7 @@ class EloquentJoinBuilder extends Builder
 
     /**
      * @param bool $useTableAlias
+     *
      * @return $this
      */
     public function setUseTableAlias(bool $useTableAlias)
@@ -634,6 +640,9 @@ class EloquentJoinBuilder extends Builder
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function isLeftJoin(): bool
     {
         return $this->leftJoin;
@@ -641,6 +650,7 @@ class EloquentJoinBuilder extends Builder
 
     /**
      * @param bool $leftJoin
+     *
      * @return $this
      */
     public function setLeftJoin(bool $leftJoin)
@@ -650,6 +660,9 @@ class EloquentJoinBuilder extends Builder
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function isAppendRelationsCount(): bool
     {
         return $this->appendRelationsCount;
@@ -657,6 +670,7 @@ class EloquentJoinBuilder extends Builder
 
     /**
      * @param bool $appendRelationsCount
+     *
      * @return $this
      */
     public function setAppendRelationsCount(bool $appendRelationsCount)
@@ -666,6 +680,9 @@ class EloquentJoinBuilder extends Builder
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getAggregateMethod(): string
     {
         return $this->aggregateMethod;
@@ -673,6 +690,7 @@ class EloquentJoinBuilder extends Builder
 
     /**
      * @param string $aggregateMethod
+     *
      * @return $this
      *
      * @throws InvalidAggregateMethod

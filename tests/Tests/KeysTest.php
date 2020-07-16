@@ -6,8 +6,16 @@ use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Key\Order;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Key\Seller;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class KeysTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests
+ */
 class KeysTest extends TestCase
 {
+    /**
+     *
+     */
     public function testBelongsTo()
     {
         Order::joinRelations('seller')
@@ -21,6 +29,9 @@ class KeysTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testHasOne()
     {
         Seller::joinRelations('location')
@@ -34,6 +45,9 @@ class KeysTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testHasMany()
     {
         Seller::joinRelations('locations')

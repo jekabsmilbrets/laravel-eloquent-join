@@ -5,8 +5,16 @@ namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Relations;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\City;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class BelongsToManyTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Relations
+ */
 class BelongsToManyTest extends TestCase
 {
+    /**
+     *
+     */
     public function testBelongsToMany()
     {
         City::whereJoin('sellers.id', '=', 'test')->get();

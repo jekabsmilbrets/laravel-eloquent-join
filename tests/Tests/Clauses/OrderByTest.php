@@ -5,8 +5,16 @@ namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Clauses;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Order;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class OrderByTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Clauses
+ */
 class OrderByTest extends TestCase
 {
+    /**
+     *
+     */
     public function testOrderBy()
     {
         Order::joinRelations('seller')
@@ -23,6 +31,9 @@ class OrderByTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testOrderByMultiple()
     {
         Order::joinRelations('seller')

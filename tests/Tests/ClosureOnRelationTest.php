@@ -5,8 +5,16 @@ namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Seller;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class ClosureOnRelationTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests
+ */
 class ClosureOnRelationTest extends TestCase
 {
+    /**
+     *
+     */
     public function testWhereOnRelationWithOrderByJoin()
     {
         //location have two where  ['is_primary => 0', 'is_secondary' => 0]
@@ -60,6 +68,9 @@ class ClosureOnRelationTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testWhereOnRelationWithoutOrderByJoin()
     {
         $seller = Seller::find(1);

@@ -5,8 +5,16 @@ namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\OrderItem;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class ClosureTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests
+ */
 class ClosureTest extends TestCase
 {
+    /**
+     *
+     */
     public function testNestOne()
     {
         OrderItem::where(
@@ -27,6 +35,9 @@ class ClosureTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testNestTwo()
     {
         OrderItem::where(

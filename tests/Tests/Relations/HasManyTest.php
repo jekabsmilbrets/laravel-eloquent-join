@@ -5,8 +5,16 @@ namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Relations;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Seller;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class HasManyTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Relations
+ */
 class HasManyTest extends TestCase
 {
+    /**
+     *
+     */
     public function testHasMany()
     {
         Seller::joinRelations('locations')->get();
@@ -20,6 +28,9 @@ class HasManyTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testHasManyHasOne()
     {
         Seller::joinRelations('locations.city')->get();
@@ -34,6 +45,9 @@ class HasManyTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testHasManyBelongsTo()
     {
         Seller::joinRelations('locations.integrations')->get();

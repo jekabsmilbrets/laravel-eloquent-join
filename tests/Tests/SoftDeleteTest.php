@@ -10,6 +10,9 @@ use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
  */
 class SoftDeleteTest extends TestCase
 {
+    /**
+     *
+     */
     public function testNotRelatedWithoutTrashedDefault()
     {
         OrderItem::orderByJoin('name')->get();
@@ -21,6 +24,9 @@ class SoftDeleteTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testNotRelatedWithoutTrashedExplicit()
     {
         OrderItem::orderByJoin('name')->withoutTrashed()->get();
@@ -32,6 +38,9 @@ class SoftDeleteTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testNotRelatedOnlyTrashedExplicit()
     {
         OrderItem::orderByJoin('name')->onlyTrashed()->get();
@@ -43,6 +52,9 @@ class SoftDeleteTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testNotRelatedWithTrashedExplicit()
     {
         OrderItem::orderByJoin('name')->withTrashed()->get();
@@ -53,6 +65,9 @@ class SoftDeleteTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testRelatedWithoutTrashedDefault()
     {
         OrderItem::orderByJoin('order.number')->get();
@@ -67,6 +82,9 @@ class SoftDeleteTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testRelatedWithoutTrashedExplicit()
     {
         OrderItem::orderByJoin('order.number')->withoutTrashed()->get();
@@ -82,6 +100,9 @@ class SoftDeleteTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testRelatedOnlyTrashedExplicit()
     {
         OrderItem::orderByJoin('order.number')->onlyTrashed()->get();
@@ -97,6 +118,9 @@ class SoftDeleteTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testRelatedWithTrashedExplicit()
     {
         OrderItem::orderByJoin('order.number')->withTrashed()->get();
@@ -111,6 +135,9 @@ class SoftDeleteTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testRelatedWithTrashedOnRelation()
     {
         OrderItem::orderByJoin('orderWithTrashed.number')->get();
@@ -125,6 +152,9 @@ class SoftDeleteTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testRelatedOnlyTrashedOnRelation()
     {
         OrderItem::orderByJoin('orderOnlyTrashed.number')->get();

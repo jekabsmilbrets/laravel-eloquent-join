@@ -5,8 +5,16 @@ namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Relations;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Location;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class MorphManyTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Relations
+ */
 class MorphManyTest extends TestCase
 {
+    /**
+     *
+     */
     public function testMorphMany()
     {
         $sql = Location::joinRelations('tags')->toSql();

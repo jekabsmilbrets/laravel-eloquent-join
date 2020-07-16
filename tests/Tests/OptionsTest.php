@@ -6,8 +6,16 @@ use JekabsMilbrets\Laravel\EloquentJoin\EloquentJoinBuilder;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\City;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class OptionsTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests
+ */
 class OptionsTest extends TestCase
 {
+    /**
+     *
+     */
     public function testUseTableAlias()
     {
         $city = new City();
@@ -16,6 +24,9 @@ class OptionsTest extends TestCase
         $this->assertEquals(true, $city->newModelQuery()->isUseTableAlias());
     }
 
+    /**
+     *
+     */
     public function testAppendRelationsCount()
     {
         $city = new City();
@@ -24,6 +35,9 @@ class OptionsTest extends TestCase
         $this->assertEquals(true, $city->newModelQuery()->isAppendRelationsCount());
     }
 
+    /**
+     *
+     */
     public function testLeftJoin()
     {
         $city = new City();
@@ -32,6 +46,9 @@ class OptionsTest extends TestCase
         $this->assertEquals(false, $city->newModelQuery()->isLeftJoin());
     }
 
+    /**
+     *
+     */
     public function testAggregateMethod()
     {
         $city = new City();

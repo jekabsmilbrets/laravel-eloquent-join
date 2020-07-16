@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class CreateDatabase.
@@ -14,7 +15,8 @@ class CreateDatabase extends Migration
     public function up()
     {
         Schema::create(
-            'states', function (Blueprint $table) {
+            'states',
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name')->nullable();
 
@@ -24,7 +26,8 @@ class CreateDatabase extends Migration
         );
 
         Schema::create(
-            'cities', function (Blueprint $table) {
+            'cities',
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name')->nullable();
                 $table->unsignedInteger('state_id')->nullable();
@@ -37,7 +40,8 @@ class CreateDatabase extends Migration
         );
 
         Schema::create(
-            'sellers', function (Blueprint $table) {
+            'sellers',
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('title')->nullable();
                 $table->unsignedInteger('city_id')->nullable();
@@ -50,7 +54,8 @@ class CreateDatabase extends Migration
         );
 
         Schema::create(
-            'orders', function (Blueprint $table) {
+            'orders',
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('number')->nullable();
                 $table->unsignedInteger('seller_id')->nullable();
@@ -63,7 +68,8 @@ class CreateDatabase extends Migration
         );
 
         Schema::create(
-            'order_items', function (Blueprint $table) {
+            'order_items',
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');
                 $table->unsignedInteger('order_id')->nullable();
@@ -76,7 +82,8 @@ class CreateDatabase extends Migration
         );
 
         Schema::create(
-            'locations', function (Blueprint $table) {
+            'locations',
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('address')->nullable();
                 $table->boolean('is_primary')->default(0);
@@ -93,7 +100,8 @@ class CreateDatabase extends Migration
         );
 
         Schema::create(
-            'zip_codes', function (Blueprint $table) {
+            'zip_codes',
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name')->nullable();
                 $table->boolean('is_primary')->default(0);
@@ -107,7 +115,8 @@ class CreateDatabase extends Migration
         );
 
         Schema::create(
-            'location_addresses', function (Blueprint $table) {
+            'location_addresses',
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name')->nullable();
                 $table->boolean('is_primary')->default(0);
@@ -121,7 +130,8 @@ class CreateDatabase extends Migration
         );
 
         Schema::create(
-            'users', function (Blueprint $table) {
+            'users',
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name')->nullable();
                 $table->unsignedInteger('location_address_id')->nullable();
@@ -134,7 +144,8 @@ class CreateDatabase extends Migration
         );
 
         Schema::create(
-            'integrations', function (Blueprint $table) {
+            'integrations',
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name')->nullable();
                 $table->unsignedInteger('location_id')->nullable();
@@ -148,7 +159,8 @@ class CreateDatabase extends Migration
 
         //for key tests
         Schema::create(
-            'key_orders', function (Blueprint $table) {
+            'key_orders',
+            function (Blueprint $table) {
                 $table->increments('id_order_primary');
                 $table->unsignedInteger('id_order_owner')->nullable();
 
@@ -160,7 +172,8 @@ class CreateDatabase extends Migration
         );
 
         Schema::create(
-            'key_sellers', function (Blueprint $table) {
+            'key_sellers',
+            function (Blueprint $table) {
                 $table->increments('id_seller_primary');
                 $table->unsignedInteger('id_seller_owner')->nullable();
 
@@ -169,7 +182,8 @@ class CreateDatabase extends Migration
         );
 
         Schema::create(
-            'key_locations', function (Blueprint $table) {
+            'key_locations',
+            function (Blueprint $table) {
                 $table->increments('id_location_primary');
                 $table->unsignedInteger('id_location_owner')->nullable();
 

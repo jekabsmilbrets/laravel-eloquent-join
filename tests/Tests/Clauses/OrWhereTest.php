@@ -5,8 +5,16 @@ namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Clauses;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Order;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class OrWhereTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Clauses
+ */
 class OrWhereTest extends TestCase
 {
+    /**
+     *
+     */
     public function testWhere()
     {
         Order::joinRelations('seller')

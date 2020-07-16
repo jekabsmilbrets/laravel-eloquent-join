@@ -6,8 +6,16 @@ use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Key\Order;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Key\Seller;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class KeysOwnerTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests
+ */
 class KeysOwnerTest extends TestCase
 {
+    /**
+     *
+     */
     public function testBelogsTo()
     {
         Order::joinRelations('sellerOwner')
@@ -21,6 +29,9 @@ class KeysOwnerTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testHasOne()
     {
         Seller::joinRelations('locationOwner')
@@ -34,6 +45,9 @@ class KeysOwnerTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testHasMany()
     {
         Seller::joinRelations('locationsOwner')

@@ -5,8 +5,16 @@ namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Relations;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\User;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class MorphOneTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Relations
+ */
 class MorphOneTest extends TestCase
 {
+    /**
+     *
+     */
     public function testMorphOne()
     {
         $sql = User::joinRelations('tags')->toSql();

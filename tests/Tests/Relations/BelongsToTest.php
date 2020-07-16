@@ -5,8 +5,16 @@ namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Relations;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Order;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class BelongsToTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Relations
+ */
 class BelongsToTest extends TestCase
 {
+    /**
+     *
+     */
     public function testBelongsTo()
     {
         Order::joinRelations('seller')->get();
@@ -19,6 +27,9 @@ class BelongsToTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testBelongsToHasOne()
     {
         Order::joinRelations('seller.locationPrimary')->get();
@@ -34,6 +45,9 @@ class BelongsToTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testBelongsToHasMany()
     {
         Order::joinRelations('seller.locations')->get();
@@ -48,6 +62,9 @@ class BelongsToTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testBelongsToHasOneHasMany()
     {
         Order::joinRelations('seller.locationPrimary.integrations')->get();
@@ -64,6 +81,9 @@ class BelongsToTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testBelongsToHasManyHasOne()
     {
         Order::joinRelations('seller.locationPrimary.locationAddressPrimary')->get();

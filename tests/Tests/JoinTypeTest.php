@@ -6,8 +6,16 @@ use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Order;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Seller;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class JoinTypeTest
+ *
+ * @package JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests
+ */
 class JoinTypeTest extends TestCase
 {
+    /**
+     *
+     */
     public function testLeftJoin()
     {
         Seller::setLeftJoin(true)->whereJoin('city.name', '=', 'test')->get();
@@ -22,6 +30,9 @@ class JoinTypeTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testInnerJoin()
     {
         Seller::setLeftJoin(false)->whereJoin('city.name', '=', 'test')->get();
@@ -36,6 +47,9 @@ class JoinTypeTest extends TestCase
         $this->assertQueryMatches($queryTest, $this->fetchQuery());
     }
 
+    /**
+     *
+     */
     public function testMixedJoin()
     {
         Order::joinRelations('seller', true)->joinRelations('seller.city', false)->joinRelations('seller.city.state', true)->get();
