@@ -1,5 +1,5 @@
 {
-    "name": "railken/laravel-eloquent-join",
+    "name": "jekabsmilbrets/laravel-eloquent-join",
     "description": "This package introduces the join magic for eloquent models and relations.",
     "keywords": [
         "laravel join",
