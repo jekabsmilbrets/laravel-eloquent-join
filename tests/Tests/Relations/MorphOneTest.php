@@ -1,9 +1,9 @@
 <?php
 
-namespace Fico7489\Laravel\EloquentJoin\Tests\Tests\Relations;
+namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Relations;
 
-use Fico7489\Laravel\EloquentJoin\Tests\Models\User;
-use Fico7489\Laravel\EloquentJoin\Tests\TestCase;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\User;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
 class MorphOneTest extends TestCase
 {

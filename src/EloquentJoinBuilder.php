@@ -1,12 +1,12 @@
 <?php
 
-namespace Fico7489\Laravel\EloquentJoin;
+namespace JekabsMilbrets\Laravel\EloquentJoin;
 
-use Fico7489\Laravel\EloquentJoin\Exceptions\InvalidAggregateMethod;
-use Fico7489\Laravel\EloquentJoin\Exceptions\InvalidRelation;
-use Fico7489\Laravel\EloquentJoin\Exceptions\InvalidRelationClause;
-use Fico7489\Laravel\EloquentJoin\Exceptions\InvalidRelationGlobalScope;
-use Fico7489\Laravel\EloquentJoin\Exceptions\InvalidRelationWhere;
+use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidAggregateMethod;
+use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelation;
+use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationClause;
+use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationGlobalScope;
+use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationWhere;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;

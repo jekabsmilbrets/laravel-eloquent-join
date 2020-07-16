@@ -1,10 +1,10 @@
 <?php
 
-namespace Fico7489\Laravel\EloquentJoin\Tests\Tests;
+namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests;
 
-use Fico7489\Laravel\EloquentJoin\Tests\Models\Key\Order;
-use Fico7489\Laravel\EloquentJoin\Tests\Models\Key\Seller;
-use Fico7489\Laravel\EloquentJoin\Tests\TestCase;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Key\Order;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Key\Seller;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
 class KeysOwnerTest extends TestCase
 {

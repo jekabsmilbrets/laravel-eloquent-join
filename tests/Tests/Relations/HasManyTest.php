@@ -1,9 +1,9 @@
 <?php
 
-namespace Fico7489\Laravel\EloquentJoin\Tests\Tests\Relations;
+namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Relations;
 
-use Fico7489\Laravel\EloquentJoin\Tests\Models\Seller;
-use Fico7489\Laravel\EloquentJoin\Tests\TestCase;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Seller;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
 class HasManyTest extends TestCase
 {

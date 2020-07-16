@@ -1,13 +1,13 @@
 <?php
 
-namespace Fico7489\Laravel\EloquentJoin\Tests\Tests;
+namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests;
 
-use Fico7489\Laravel\EloquentJoin\Exceptions\InvalidAggregateMethod;
-use Fico7489\Laravel\EloquentJoin\Exceptions\InvalidRelationClause;
-use Fico7489\Laravel\EloquentJoin\Exceptions\InvalidRelationGlobalScope;
-use Fico7489\Laravel\EloquentJoin\Exceptions\InvalidRelationWhere;
-use Fico7489\Laravel\EloquentJoin\Tests\Models\Seller;
-use Fico7489\Laravel\EloquentJoin\Tests\TestCase;
+use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidAggregateMethod;
+use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationClause;
+use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationGlobalScope;
+use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationWhere;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Seller;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
 class ExceptionTest extends TestCase
 {

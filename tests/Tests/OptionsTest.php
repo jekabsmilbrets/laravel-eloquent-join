@@ -1,10 +1,10 @@
 <?php
 
-namespace Fico7489\Laravel\EloquentJoin\Tests\Tests;
+namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests;
 
-use Fico7489\Laravel\EloquentJoin\EloquentJoinBuilder;
-use Fico7489\Laravel\EloquentJoin\Tests\Models\City;
-use Fico7489\Laravel\EloquentJoin\Tests\TestCase;
+use JekabsMilbrets\Laravel\EloquentJoin\EloquentJoinBuilder;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\City;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
 class OptionsTest extends TestCase
 {

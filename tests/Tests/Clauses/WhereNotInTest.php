@@ -1,9 +1,9 @@
 <?php
 
-namespace Fico7489\Laravel\EloquentJoin\Tests\Tests\Clauses;
+namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests\Clauses;
 
-use Fico7489\Laravel\EloquentJoin\Tests\Models\Order;
-use Fico7489\Laravel\EloquentJoin\Tests\TestCase;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Order;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
 class WhereNotInTest extends TestCase
 {

@@ -1,5 +1,6 @@
 {
     "name": "jekabsmilbrets/laravel-eloquent-join",
+    "type": "library",
     "description": "This package introduces the join magic for eloquent models and relations.",
     "keywords": [
         "laravel join",
@@ -8,11 +9,7 @@
         "laravel where join",
         "laravel join relation"
     ],
-    "homepage": "https://github.com/fico7489/laravel-eloquent-join",
-    "support": {
-        "issues": "https://github.com/fico7489/laravel-eloquent-join/issues",
-        "source": "https://github.com/fico7489/laravel-eloquent-join"
-    },
+    "homepage": "https://github.com/jekabsmilbrets/laravel-eloquent-join",
     "license": "MIT",
     "authors": [
         {
@@ -22,6 +19,7 @@
             "role": "Developer"
         }
     ],
+    "version": "0.2.3",
     "require": {
         "illuminate/database": "5.* || 6.* || 7.*"
     },
@@ -31,12 +29,19 @@
     },
     "autoload": {
         "psr-4": {
-            "Fico7489\\Laravel\\EloquentJoin\\": "src"
+            "JekabsMilbrets\\Laravel\\EloquentJoin\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Fico7489\\Laravel\\EloquentJoin\\Tests\\": "tests/"
+            "JekabsMilbrets\\Laravel\\EloquentJoin\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "aliases": {
+                "Formatter": "JekabsMilbrets\\Laravel\\EloquentJoin"
+            }
         }
     },
     "minimum-stability": "dev",
