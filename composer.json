@@ -17,9 +17,15 @@
             "email": "filip.horvat@am2studio.hr",
             "homepage": "http://am2studio.hr",
             "role": "Developer"
+        },
+        {
+            "name": "Jēkabs Milbrets",
+            "email": "jekabs.milbrets@me.com",
+            "homepage": "http://gjr.lv",
+            "role": "Developer"
         }
     ],
-    "version": "0.2.4",
+    "version": "0.2.5",
     "require": {
         "illuminate/database": "5.* || 6.* || 7.*"
     },
