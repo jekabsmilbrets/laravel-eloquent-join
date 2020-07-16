@@ -2,10 +2,12 @@
 
 namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Models;
 
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+
 class Tag extends BaseModel
 {
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return MorphTo
      */
     public function taggable()
     {

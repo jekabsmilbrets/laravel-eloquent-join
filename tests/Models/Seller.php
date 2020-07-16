@@ -36,9 +36,11 @@ class Seller extends BaseModel
     public function locationPrimaryInvalid2()
     {
         return $this->hasOne(Location::class)
-            ->where(function ($query) {
-                return $query->where(['id' => 1]);
-            });
+            ->where(
+                function ($query) {
+                    return $query->where(['id' => 1]);
+                }
+            );
     }
 
     public function locationPrimaryInvalid3()

@@ -3,8 +3,6 @@
 namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests;
 
 use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidAggregateMethod;
-use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationClause;
-use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationGlobalScope;
 use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidRelationWhere;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\Seller;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;

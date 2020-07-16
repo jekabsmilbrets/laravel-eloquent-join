@@ -2,8 +2,8 @@
 
 namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Models;
 
-use JekabsMilbrets\Laravel\EloquentJoin\Tests\Scope\TestExceptionScope;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use JekabsMilbrets\Laravel\EloquentJoin\Tests\Scope\TestExceptionScope;
 
 class LocationWithGlobalScope extends BaseModel
 {

@@ -3,9 +3,20 @@
 namespace JekabsMilbrets\Laravel\EloquentJoin\Traits;
 
 use JekabsMilbrets\Laravel\EloquentJoin\EloquentJoinBuilder;
+use JekabsMilbrets\Laravel\EloquentJoin\Exceptions\InvalidAggregateMethod;
 
+/**
+ * Trait EloquentJoin.
+ */
 trait EloquentJoin
 {
+    /**
+     * @param $query
+     *
+     * @return EloquentJoinBuilder
+     *
+     * @throws InvalidAggregateMethod
+     */
     public function newEloquentBuilder($query)
     {
         $newEloquentBuilder = new EloquentJoinBuilder($query);

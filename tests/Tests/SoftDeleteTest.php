@@ -5,6 +5,9 @@ namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Tests;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\Models\OrderItem;
 use JekabsMilbrets\Laravel\EloquentJoin\Tests\TestCase;
 
+/**
+ * Class SoftDeleteTest.
+ */
 class SoftDeleteTest extends TestCase
 {
     public function testNotRelatedWithoutTrashedDefault()

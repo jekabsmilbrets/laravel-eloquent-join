@@ -2,8 +2,8 @@
 
 namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Models;
 
-use JekabsMilbrets\Laravel\EloquentJoin\Traits\EloquentJoin;
 use Illuminate\Database\Eloquent\Model;
+use JekabsMilbrets\Laravel\EloquentJoin\Traits\EloquentJoin;
 
 class BaseModel extends Model
 {

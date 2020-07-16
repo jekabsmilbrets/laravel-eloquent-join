@@ -2,6 +2,7 @@
 
 namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Models;
 
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Location extends BaseModel
@@ -34,7 +35,7 @@ class Location extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     * @return MorphOne
      */
     public function tags()
     {

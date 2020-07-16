@@ -9,11 +9,13 @@ class ClosureTest extends TestCase
 {
     public function testNestOne()
     {
-        OrderItem::where(function ($query) {
-            $query
-                ->orWhereJoin('order.id', '=', 1)
-                ->orWhereJoin('order.id', '=', 2);
-        })->get();
+        OrderItem::where(
+            function ($query) {
+                $query
+                    ->orWhereJoin('order.id', '=', 1)
+                    ->orWhereJoin('order.id', '=', 2);
+            }
+        )->get();
 
         $queryTest = 'select order_items.* 
             from "order_items" 
@@ -27,14 +29,18 @@ class ClosureTest extends TestCase
 
     public function testNestTwo()
     {
-        OrderItem::where(function ($query) {
-            $query
-                ->orWhereJoin('order.id', '=', 1)
-                ->orWhereJoin('order.id', '=', 2)
-                ->where(function ($query) {
-                    $query->orWhereJoin('order.seller.locationPrimary.id', '=', 3);
-                });
-        })->get();
+        OrderItem::where(
+            function ($query) {
+                $query
+                    ->orWhereJoin('order.id', '=', 1)
+                    ->orWhereJoin('order.id', '=', 2)
+                    ->where(
+                        function ($query) {
+                            $query->orWhereJoin('order.seller.locationPrimary.id', '=', 3);
+                        }
+                    );
+            }
+        )->get();
 
         $queryTest = 'select order_items.* 
             from "order_items" 

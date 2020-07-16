@@ -2,6 +2,9 @@
 
 namespace JekabsMilbrets\Laravel\EloquentJoin\Traits;
 
+/**
+ * Trait JoinRelationTrait.
+ */
 trait JoinRelationTrait
 {
     /**
@@ -12,7 +15,7 @@ trait JoinRelationTrait
      *
      * @return mixed
      */
-    public function __call($method, $parameters)
+    public function __call(string $method, array $parameters)
     {
         $this->getQuery()->relationClauses[] = [$method => $parameters];
 

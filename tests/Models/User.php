@@ -2,6 +2,7 @@
 
 namespace JekabsMilbrets\Laravel\EloquentJoin\Tests\Models;
 
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends BaseModel
@@ -13,7 +14,7 @@ class User extends BaseModel
     protected $fillable = ['name'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     * @return MorphOne
      */
     public function tags()
     {
